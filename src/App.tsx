@@ -1,10 +1,23 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+
+// provider
+import AppProvider from './contexts';
+
+// routes
+import Routes from './routes';
+
+// styles
+import GlobalStyle from './styles/global';
 
 function App() {
   return (
-    <div className="App">
-      <h1>LetMeAsk</h1>
-    </div>
+    <BrowserRouter>
+      <GlobalStyle />
+      <AppProvider>
+        <Routes />
+      </AppProvider>
+    </BrowserRouter>
   );
 }
 
