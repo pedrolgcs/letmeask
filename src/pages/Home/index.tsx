@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import { useHistory } from 'react-router-dom';
+
+// services
+import { database } from '../../services/firebase';
 
 // components
 import Button from '../../components/Button';
@@ -14,8 +17,10 @@ import googleIconImg from '../../assets/images/google-icon.svg';
 
 // styles
 import * as Style from './styles';
+import { useState } from 'react';
 
 const Home: React.FC = () => {
+  const [roomCode, setRoomCode] = useState('');
   const { signInWithGoogle, user } = useAuth();
   const history = useHistory();
 
@@ -25,6 +30,19 @@ const Home: React.FC = () => {
     }
 
     history.push('/rooms/new');
+  }
+
+  async function handleJoinRoom(event: FormEvent) {
+    event.preventDefault();
+
+    const roomRef = await database.ref(`rooms/${roomCode}`).get();
+
+    if (!roomRef.exists()) {
+      alert('Room does not exists');
+      return;
+    }
+
+    history.push(`/rooms/${roomCode}`);
   }
 
   return (
@@ -50,8 +68,14 @@ const Home: React.FC = () => {
             Crie sua sala com o Google
           </button>
           <div className="separator">ou entre em uma sala</div>
-          <form>
-            <input type="text" placeholder="Digite o código da sala" />
+          <form onSubmit={handleJoinRoom}>
+            <input
+              value={roomCode}
+              onChange={(event) => setRoomCode(event.target.value)}
+              required
+              type="text"
+              placeholder="Digite o código da sala"
+            />
             <Button type="submit">Entrar na sala</Button>
           </form>
         </div>

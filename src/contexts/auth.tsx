@@ -61,7 +61,7 @@ const AuthProvider: React.FC = ({ children }) => {
     return () => {
       unsubscribe();
     };
-  }, [user]);
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, signInWithGoogle }}>

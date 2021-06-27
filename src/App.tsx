@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
 // provider
 import AppProvider from './contexts';
@@ -14,6 +15,7 @@ function App() {
   return (
     <BrowserRouter>
       <GlobalStyle />
+      <Toaster />
       <AppProvider>
         <Routes />
       </AppProvider>

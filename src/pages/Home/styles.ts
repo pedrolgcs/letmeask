@@ -18,6 +18,7 @@ export const Container = styled.div`
 
     img {
       max-width: 320px;
+      max-height: 250px;
     }
 
     strong {
