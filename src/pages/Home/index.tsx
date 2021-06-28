@@ -1,5 +1,6 @@
 import React, { FormEvent } from 'react';
 import { useHistory } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 // services
 import { database } from '../../services/firebase';
@@ -38,7 +39,12 @@ const Home: React.FC = () => {
     const roomRef = await database.ref(`rooms/${roomCode}`).get();
 
     if (!roomRef.exists()) {
-      alert('Room does not exists');
+      toast.error('A sala não existe');
+      return;
+    }
+
+    if (roomRef.val().endedAt) {
+      toast.error('A sala já foi encerrada');
       return;
     }
 

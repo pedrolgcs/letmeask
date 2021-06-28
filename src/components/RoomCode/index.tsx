@@ -1,4 +1,5 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 
 // assets
 import copyImage from '../../assets/images/copy.svg';
@@ -13,6 +14,7 @@ interface RoomCodeProps {
 const RoomCode: React.FC<RoomCodeProps> = ({ code }) => {
   function copyRoomToClipboard() {
     navigator.clipboard.writeText(code);
+    toast.success('Código da sala copiado!');
   }
 
   return (
