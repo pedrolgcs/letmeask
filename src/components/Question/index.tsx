@@ -10,20 +10,26 @@ type QuestionProps = {
     avatar: string;
   };
   children?: ReactNode;
+  isHighLighted?: boolean;
+  isAnswered?: boolean;
 };
 
-const Question: React.FC<QuestionProps> = ({ content, author, children }) => {
+const Question: React.FC<QuestionProps> = ({
+  content,
+  author,
+  isAnswered = false,
+  isHighLighted = false,
+  children,
+}) => {
   return (
-    <Style.Container>
+    <Style.Container isAnswered={isAnswered} isHighLighted={isHighLighted}>
       <p>{content}</p>
       <footer>
         <div className="user-info">
           <img src={author.avatar} alt={author.name} />
           <span>{author.name}</span>
         </div>
-        <div className="buttons-container">
-          {children}
-        </div>
+        <div className="buttons-container">{children}</div>
       </footer>
     </Style.Container>
   );

@@ -35,7 +35,7 @@ const NewRoom: React.FC = () => {
       title: newRoom,
     });
 
-    history.push(`/rooms/${firebaseRoom.key}`);
+    history.push(`/admin/rooms/${firebaseRoom.key}`);
   };
 
   return (

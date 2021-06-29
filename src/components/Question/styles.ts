@@ -1,6 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+type ContainerProps = {
+  isAnswered: boolean;
+  isHighLighted: boolean;
+};
+
+export const Container = styled.div<ContainerProps>`
   background: #fefefe;
   border-radius: 8px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
@@ -8,6 +13,26 @@ export const Container = styled.div`
 
   & + & {
     margin-top: 8px;
+  }
+
+  ${({ isHighLighted }) =>
+    isHighLighted &&
+    css`
+      background: #f4f0ff;
+      border: 1px solid #835afd;
+
+      footer .user-info span {
+        color: #29292e;
+      }
+    `}
+
+  ${({ isAnswered }) => 
+    isAnswered && 
+    css`
+      background: #dbdcdd;
+      border: 0;
+      opacity: 0.5;
+    `
   }
 
   p {
@@ -38,31 +63,36 @@ export const Container = styled.div`
       }
     }
 
-    button {
-      border: 0;
-      cursor: pointer;
-      background: transparent;
-      transition: filter 0.5s;
+    .buttons-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
 
-      &.like-button {
-        color: #737380;
-        gap: 8px;
+      button {
+        border: 0;
+        cursor: pointer;
+        background: transparent;
+        transition: filter 0.5s;
 
-        display: flex;
-        align-items: flex-end;
+        &.like-button {
+          color: #737380;
+          gap: 8px;
 
+          display: flex;
+          align-items: flex-end;
 
-        &.liked {
-          color: #835afd;
+          &.liked {
+            color: #835afd;
 
-          svg path {
-            stroke: #835afd;
+            svg path {
+              stroke: #835afd;
+            }
           }
         }
-      }
 
-      &:hover {
-        filter: brightness(0.7);
+        &:hover {
+          filter: brightness(0.7);
+        }
       }
     }
   }

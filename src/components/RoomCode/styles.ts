@@ -22,7 +22,6 @@ export const Button = styled.button`
   }
 
   span {
-    width: 240px;
     align-self: center;
     padding: 0 16px 0 12px;
     font-size: 14px;
